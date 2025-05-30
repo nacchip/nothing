@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Здесь ничего нет</title>
+  <script>
+    const correctSequence = [true, true, true, true, false, false, true, true, true, true, false, false];
+    let inputSequence = [];
+
+    function checkSequence() {
+      if (inputSequence.length === correctSequence.length) {
+        const isCorrect = inputSequence.every((val, index) => val === correctSequence[index]);
+        if (isCorrect) {
+          window.location.href = "https://www.youtube.com/";
+        } else {
+          inputSequence = []; 
+        }
+      }
+    }
+
+    function loopAlert() {
+      const result = confirm("Здесь ничего нет");
+      inputSequence.push(result);
+      checkSequence();
+      setTimeout(loopAlert, 100);
+    }
+
+    window.onload = () => {
+      loopAlert();
+    };
+  </script>
+</head>
+<body>
+</body>
+</html>
