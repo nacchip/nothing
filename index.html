@@ -7,26 +7,25 @@
     const correctSequence = [true, true, true, true, false, false, true, true, true, true, false, false];
     let inputSequence = [];
 
-    function checkSequence() {
-      if (inputSequence.length === correctSequence.length) {
-        const isCorrect = inputSequence.every((val, index) => val === correctSequence[index]);
-        if (isCorrect) {
-          window.location.href = "https://www.youtube.com/";
-        } else {
-          inputSequence = []; 
-        }
-      }
-    }
-
-    function loopAlert() {
+    function showPrompt() {
       const result = confirm("Здесь ничего нет");
       inputSequence.push(result);
-      checkSequence();
-      setTimeout(loopAlert, 100);
+      const currentLength = inputSequence.length;
+      const isCorrectSoFar = correctSequence
+        .slice(0, currentLength)
+        .every((val, index) => val === inputSequence[index]);
+
+      if (!isCorrectSoFar) {
+        inputSequence = []; 
+      } else if (currentLength === correctSequence.length) {
+        window.location.href = "https://www.youtube.com/";
+        return;
+      }
+      showPrompt();
     }
 
     window.onload = () => {
-      loopAlert();
+      showPrompt();
     };
   </script>
 </head>
